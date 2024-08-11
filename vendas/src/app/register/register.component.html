@@ -1,0 +1,36 @@
+<div class="register-container">
+  <h2>Registrar</h2>
+  <form (ngSubmit)="onRegister()">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input type="text" id="name" [(ngModel)]="registerData.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="taxNumber">CPF/CNPJ</label>
+      <input type="text" id="taxNumber" [(ngModel)]="registerData.taxNumber" name="taxNumber" required>
+    </div>
+    <div class="form-group">
+      <label for="mail">E-mail</label>
+      <input type="email" id="mail" [(ngModel)]="registerData.mail" name="mail" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Telefone</label>
+      <input type="text" id="phone" [(ngModel)]="registerData.phone" name="phone" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" [(ngModel)]="registerData.password" name="password" required>
+    </div>
+
+    <!-- Exibição da mensagem de erro -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" class="btn">Registrar</button>
+  </form>
+
+  <div class="login-link">
+    <p>Já tem uma conta? <a routerLink="/login">Faça login aqui</a></p>
+  </div>
+</div>

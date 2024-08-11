@@ -1,0 +1,18 @@
+<div class="login-container">
+    <h2>Login</h2>
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="taxNumber">CPF/CNPJ</label>
+        <input type="text" id="taxNumber" [(ngModel)]="loginData.taxNumber" name="taxNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" [(ngModel)]="loginData.password" name="password" required>
+      </div>
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+    <div class="register-link">
+      <p>Não tem uma conta? <a routerLink="/register">Registre-se aqui</a></p>
+    </div>
+  </div>
+  
