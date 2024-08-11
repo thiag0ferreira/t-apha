@@ -1,69 +1,77 @@
 <div class="products-container">
-    <h2>Produtos</h2>
-    <button (click)="showAddForm = !showAddForm" class="btn-add">
-      {{ showAddForm ? 'Cancelar' : 'Adicionar Produto' }}
-    </button>
-  
-    <!-- Formulário de Adicionar Produto -->
-    <div *ngIf="showAddForm" class="add-product-form">
-      <h3>Adicionar Produto</h3>
-      <form (ngSubmit)="onAddProduct()">
-        <div class="form-group">
-          <label for="name">Nome:</label>
-          <input type="text" id="name" [(ngModel)]="newProduct.name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="description">Descrição:</label>
-          <input type="text" id="description" [(ngModel)]="newProduct.description" name="description" required>
-        </div>
-        <div class="form-group">
-          <label for="price">Preço:</label>
-          <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" required>
-        </div>
-        <div class="form-group">
-          <label for="stock">Estoque:</label>
-          <input type="number" id="stock" [(ngModel)]="newProduct.stock" name="stock" required>
-        </div>
-        <button type="submit" class="btn">Adicionar Produto</button>
-      </form>
-    </div>
-  
-    <!-- Lista de Produtos -->
-    <ul class="products-list">
-      <li *ngFor="let product of products">
-        <div class="product-item">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <p><strong>Preço:</strong> {{ product.price | currency }}</p>
-          <p><strong>Estoque:</strong> {{ product.stock }}</p>
-          <button class="btn-edit" (click)="onEditProduct(product)">Editar</button>
-          <button class="btn-delete" (click)="onDeleteProduct(product.id)">Deletar</button>
-        </div>
-      </li>
-    </ul>
-  
-    <!-- Formulário de Edição de Produto -->
-    <div *ngIf="selectedProduct" class="edit-product-form">
-      <h3>Editar Produto</h3>
-      <form (ngSubmit)="onUpdateProduct()">
-        <div class="form-group">
-          <label for="edit-name">Nome:</label>
-          <input type="text" id="edit-name" [(ngModel)]="selectedProduct.name" name="edit-name" required>
-        </div>
-        <div class="form-group">
-          <label for="edit-description">Descrição:</label>
-          <input type="text" id="edit-description" [(ngModel)]="selectedProduct.description" name="edit-description" required>
-        </div>
-        <div class="form-group">
-          <label for="edit-price">Preço:</label>
-          <input type="number" id="edit-price" [(ngModel)]="selectedProduct.price" name="edit-price" required>
-        </div>
-        <div class="form-group">
-          <label for="edit-stock">Estoque:</label>
-          <input type="number" id="edit-stock" [(ngModel)]="selectedProduct.stock" name="edit-stock" required>
-        </div>
-        <button type="submit" class="btn">Salvar Alterações</button>
-      </form>
-    </div>
+  <h2>Produtos</h2>
+
+  <!-- Botão para mostrar/ocultar a lista de produtos -->
+  <button (click)="toggleProductsList()" class="btn-show-products">
+    {{ showProductsList ? 'Ocultar Produtos' : 'Mostrar Produtos' }}
+  </button>
+
+  <!-- Botão para mostrar/ocultar o formulário de adição de produto -->
+  <button (click)="showAddForm = !showAddForm" class="btn-add">
+    {{ showAddForm ? 'Cancelar' : 'Adicionar Produto' }}
+  </button>
+
+  <!-- Formulário de Adicionar Produto -->
+  <div *ngIf="showAddForm" class="add-product-form">
+    <h3>Adicionar Produto</h3>
+    <form (ngSubmit)="onAddProduct()">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" [(ngModel)]="newProduct.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Descrição:</label>
+        <input type="text" id="description" [(ngModel)]="newProduct.description" name="description" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Preço:</label>
+        <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" required>
+      </div>
+      <div class="form-group">
+        <label for="stock">Estoque:</label>
+        <input type="number" id="stock" [(ngModel)]="newProduct.stock" name="stock" required>
+      </div>
+      <button type="submit" class="btn">Adicionar Produto</button>
+    </form>
   </div>
-  
+
+  <!-- Lista de Produtos -->
+  <ul *ngIf="showProductsList" class="products-list">
+    <li *ngFor="let product of products">
+      <div class="product-item">
+        <p><strong>Nome:</strong>{{ product.name }}</p>
+        <p><strong>Descrição:</strong>{{ product.description }}</p>
+        <p><strong>Preço:</strong> {{ product.price | currency }}</p>
+        <p><strong>Estoque:</strong> {{ product.stock }}</p>
+        <button class="btn-edit" (click)="onEditProduct(product)">Editar</button>
+        <button class="btn-delete" (click)="onDeleteProduct(product.id)">Deletar</button>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Formulário de Edição de Produto -->
+  <div *ngIf="selectedProduct" class="edit-product-form">
+    <h3>Editar Produto</h3>
+    <form (ngSubmit)="onUpdateProduct()">
+      <div class="form-group">
+        <label for="edit-name">Nome:</label>
+        <input type="text" id="edit-name" [(ngModel)]="selectedProduct.name" name="edit-name" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-description">Descrição:</label>
+        <input type="text" id="edit-description" [(ngModel)]="selectedProduct.description" name="edit-description" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-price">Preço:</label>
+        <input type="number" id="edit-price" [(ngModel)]="selectedProduct.price" name="edit-price" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-stock">Estoque:</label>
+        <input type="number" id="edit-stock" [(ngModel)]="selectedProduct.stock" name="edit-stock" required>
+      </div>
+      <button type="submit" class="btn">Salvar Alterações</button>
+      <button type="button" class="btn" (click)="onCancelEdit()">Cancelar</button>
+    </form>
+  </div>
+
+</div>

@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   loginData = {taxNumber: '', password: ''};
+  resposta: any;
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -16,9 +17,10 @@ export class LoginComponent {
   onLogin() {
     this.authService.login(this.loginData).subscribe(response => {
       console.log('Login successful, response:', response); // Verifique a resposta no console
-      if (response.token) {
-        this.authService.saveToken(response.token);
-        this.router.navigate(['/products']);  // Redireciona para a página de produtos após o login
+      this.resposta = response.data;
+      if (this.resposta.token) {
+        this.authService.saveToken(this.resposta.token);
+        this.router.navigate(['/products'] );  // Redireciona para a página de produtos após o login
       } else {
         console.error('Token não encontrado na resposta do login.');
       }
@@ -27,4 +29,3 @@ export class LoginComponent {
     });
   }
 }
-
