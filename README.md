@@ -19,3 +19,5 @@ Para testes:
 Usuario: 04006515138
 Senha: 123456
 
+![Descrição do GIF](https://github.com/thiag0ferreira/t-apha/blob/main/projeto.gif?raw=true)
+
